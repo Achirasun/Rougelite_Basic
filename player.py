@@ -6,9 +6,10 @@ from support import import_folder
 class Player(Entity):
     def __init__(self, pos, groups, obstacle_sprites):
         super().__init__(groups)
-        self.image = pygame.image.load('./Asset/dungeon/heroes/knight/knight_idle_anim_f0.png').convert_alpha()
+        self.image = pygame.image.load('./Asset/dungeon/heroes/0.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect.inflate(0,-26)
+        
 
         # graphics setup
         self.import_player_assets()
@@ -32,10 +33,10 @@ class Player(Entity):
         self.speed = self.stats['speed']
 
     def import_player_assets(self):
-        character_path = f'../Asset/dungeon/heroes/'
-        self.animations = {'idle_up':[],'idle_down':[],'idle_left':[],'idle_right':[],
-                           'move_up':[],'move_down':[],'move_left':[],'move_right':[],
-                           'attack_up':[],'attack_down':[],'attack_left':[],'attack_right':[]}
+        character_path = '../Asset/dungeon/heroes/'
+        self.animations = {'up': [],'down': [],'left': [],'right': [],
+			'right_idle':[],'left_idle':[],'up_idle':[],'down_idle':[],
+			'right_attack':[],'left_attack':[],'up_attack':[],'down_attack':[]}
         
         for animation in self.animations.keys():
             full_path = character_path + animation
@@ -79,19 +80,19 @@ class Player(Entity):
         # idel status
         if self.direction.x == 0 and self.direction.y == 0:
             if not 'idle' in self.status and not 'attack' in self.status:
-                self.status = 'idle_' + self.status
+                self.status = self.status + '_idle'
         
         if self.attacking:
             self.direction.x = 0
             self.direction.y = 0
             if not 'attack' in self.status:
                 if 'idle' in self.status:
-                    self.status = self.status.replace('idle_', 'attack_')
+                    self.status = self.status.replace('_idle','_attack')
                 else:
-                    self.status = 'attack_' + self.status
+                    self.status = self.status + '_attack'
         else:
             if 'attack' in self.status:
-                self.status = self.status.replace('attack', '')
+                self.status = self.status.replace('_attack','')
 
     def animate(self):
         animation = self.animations[self.status]
@@ -100,12 +101,9 @@ class Player(Entity):
         self.frame_index += self.animation_speed
         if self.frame_index >= len(animation):
             self.frame_index = 0
-
+        
         # set the image
-        if animation:    
-            self.image = animation[int(self.frame_index)]
-        else:
-            print(f"Empty animation list for status: {self.status}")
+        self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center = self.hitbox.center)
 
     def cooldowns(self):
