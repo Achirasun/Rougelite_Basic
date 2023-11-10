@@ -18,7 +18,7 @@ class Enemy(Entity):
 
         #movement
         self.rect = self.image.get_rect(topleft = pos)
-        self.hitbox = self.rect.inflate(0, -10)
+        self.hitbox = self.rect.inflate(0, -26)
         self.obstacle_sprites = obstacle_sprites
 
         #stats

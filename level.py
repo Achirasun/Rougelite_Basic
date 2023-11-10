@@ -74,6 +74,7 @@ class Level:
         self.visible_sprites.update()
         self.visible_sprites.enemy_update(self.player)
         self.ui.display(self.player)
+        debug(self.player.status)
 
         pygame.display.update()
 
