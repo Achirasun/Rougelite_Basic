@@ -34,3 +34,11 @@ MONSTER_DATA = {
     "goblin" : {'health' : 150, 'exp' : 200, 'damage' : 25, 'attack_type' : 'slash', 'speed' : 1, 'resistance' : 2, 'attack_radius' : 20, 'notice_radius' : 200},
     "slime" : {'health' : 30, 'exp' : 50, 'damage' : 10, 'attack_type' : 'tackle', 'speed' : 1, 'resistance' : 1, 'attack_radius' : 10, 'notice_radius' : 100}
 }
+
+# weapons
+weapon_data = {
+    'sword' : {'cooldown' : 100, 'damage' : 50, 'graphic' : './Asset/dungeon/heroes/sword_1.png'},
+    'lance': {'cooldown': 400, 'damage': 30,'graphic':'../graphics/weapons/lance/full.png'},
+	'axe': {'cooldown': 300, 'damage': 20, 'graphic':'../graphics/weapons/axe/full.png'},
+	'rapier':{'cooldown': 50, 'damage': 8, 'graphic':'../graphics/weapons/rapier/full.png'},
+	'sai':{'cooldown': 80, 'damage': 10, 'graphic':'../graphics/weapons/sai/full.png'}}           

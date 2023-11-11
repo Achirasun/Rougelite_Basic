@@ -1,5 +1,6 @@
 import pygame
 from support import *
+from math import sin
 
 #This is File for Entity like Player Enemies
 
@@ -39,3 +40,10 @@ class Entity(pygame.sprite.Sprite):
                         self.hitbox.y = sprite.hitbox.y - 1
                     if self.direction.y < 0:
                         self.hitbox.y = sprite.hitbox.y + 22
+
+    def wave_value(self):
+        value = sin(pygame.time.get_ticks())
+        if value >= 0:
+            return 255
+        else:
+            return 0
